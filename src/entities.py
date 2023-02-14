@@ -8,4 +8,4 @@ class Disk:
         renderer.render_disk(self)
 
     def serialize(self, serializer):
-        serializer.serialize_disk(self)
+        return serializer.serialize_disk(self)

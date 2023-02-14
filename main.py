@@ -2,7 +2,7 @@ from src.scene import Scene
 from src.entities import Disk
 from src.renderer import Renderer
 from src.viewport import Viewport
-from src.serialize import JsonSerializer
+from src.serialize import JsonSerializer, XmlSerializer
 
 def main():
     scene = Scene(background_color=[102, 204, 255])
@@ -15,6 +15,7 @@ def main():
     #viewport.render(scene)
 
     JsonSerializer().serialize_scene(scene)
+    XmlSerializer().serialize_scene(scene)
 
 # stop execution
 
