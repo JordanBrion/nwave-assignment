@@ -3,6 +3,7 @@ from src.entities import Disk
 from src.renderer import Renderer
 from src.viewport import Viewport
 from src.serialize import JsonSerializer, XmlSerializer
+from src.filewriter import FileWriter
 
 def main():
     scene = Scene(background_color=[102, 204, 255])
@@ -11,7 +12,7 @@ def main():
     scene.add_entity(Disk(radius=radius, position=[-250, -216], color=[0, 255, 0]))
     scene.add_entity(Disk(radius=radius, position=[250, -216], color=[0, 0, 255]))
     
-    viewport = Viewport(width=1100, height=1000, renderer=Renderer())
+    viewport = Viewport(width=1100, height=1000, renderer=Renderer(writer=FileWriter("/Users/jordanbrion/Downloads/bonjour.jpg")))
     viewport.render(scene)
 
     #JsonSerializer().serialize_scene(scene)

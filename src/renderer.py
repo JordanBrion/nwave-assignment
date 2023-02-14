@@ -2,7 +2,8 @@ from PIL import Image, ImageDraw
 import numpy as np
 
 class Renderer:
-    def __init__(self):
+    def __init__(self, writer):
+        self.writer = writer
         self.color_mode = "RGB"
 
     def setup(self, width, height, background_color):
@@ -31,4 +32,4 @@ class Renderer:
         return self.image.height * 0.5
 
     def done(self):
-        self.image.save("/Users/jordanbrion/Downloads/pillow.png")
+        self.writer.write(self.image)
