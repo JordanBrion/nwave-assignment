@@ -5,3 +5,6 @@ class Disk:
         self.radius = radius
         self.position = np.array(position)
         self.color = color
+
+    def render(self, renderer):
+        renderer.render_disk(self)
