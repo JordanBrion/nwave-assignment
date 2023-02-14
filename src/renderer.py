@@ -2,8 +2,11 @@ import turtle
 
 class Renderer:
     def __init__(self):
+        pass
+
+    def setup(self, width, height):
         self.screen = turtle.Screen()
-        self.screen.setup(800, 800)
+        self.screen.setup(width, height)
         self.screen.colormode(255)
         turtle.tracer(False)
         self.canvas = turtle.Turtle()
