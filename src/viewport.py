@@ -6,7 +6,7 @@ class Viewport:
         self.height = height
         
     def render(self, scene):
-        self.__renderer.setup(self.width, self.height)
+        self.__renderer.setup(self.width, self.height, scene.background_color())
         for entity in scene.entities():
             entity.render(self.__renderer)
         self.__renderer.done()
