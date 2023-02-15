@@ -1,4 +1,5 @@
 import unittest
+import os
 
 from .serialize import JsonSerializer, XmlSerializer
 from .scene import Scene
@@ -17,6 +18,12 @@ class Test_Serialize(unittest.TestCase):
         scene.add_entity(Disk(radius=self.disk_radius, position=[250, -216], color=[0, 0, 255]))
         return scene
 
+    def get_golden_directory(self):
+        return os.path.join("nwave", "golden")
+
+    def get_serialize_golden_directory(self):
+        return os.path.join(self.get_golden_directory(), "serialize")        
+
     def assertWithGoldenFile(self, json, golden_fullpath):
         with open(golden_fullpath, "r") as f:
             expected_json = f.read()
@@ -32,7 +39,10 @@ class Test_Serialize(unittest.TestCase):
     def test_should_serialize_to_3_disks_in_json_when_scene_has_3_disks(self):
         json = JsonSerializer().serialize_scene(self.make_scene_with_3_disks())
 
-        self.assertWithGoldenFile(json, golden_fullpath="nwave/golden/three_disks.json")
+        self.assertWithGoldenFile(
+            json, 
+            golden_fullpath=os.path.join(self.get_serialize_golden_directory(), "three_disks.json")
+        )
 
     def test_should_serialize_to_empty_xml_when_scene_is_empty(self):
         empty_scene = Scene(background_color=[102, 204, 255])
@@ -44,4 +54,7 @@ class Test_Serialize(unittest.TestCase):
     def test_should_serialize_to_3_disks_in_xml_when_scene_has_3_disks(self):        
         json = XmlSerializer().serialize_scene(self.make_scene_with_3_disks())
 
-        self.assertWithGoldenFile(json, golden_fullpath="nwave/golden/three_disks.xml")
+        self.assertWithGoldenFile(
+            json, 
+            golden_fullpath=os.path.join(self.get_serialize_golden_directory(), "three_disks.xml")
+        )
