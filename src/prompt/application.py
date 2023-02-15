@@ -5,4 +5,5 @@ class PromptApplication:
         self.state = MainMenuState()
 
     def run(self):
-        self.state.display_prompt()
+        while self.state is not None:
+            self.state = self.state.display_prompt()
