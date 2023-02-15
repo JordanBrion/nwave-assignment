@@ -1,4 +1,4 @@
-from src.prompt.application import PromptApplication
+from nwave.prompt.application import PromptApplication
 
 def main():
     app = PromptApplication()
