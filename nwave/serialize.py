@@ -31,7 +31,7 @@ class XmlSerializer:
         for entity in scene.entities():
             xml += entity.serialize(self)
         
-        xml = self.wrap("Scene", xml)
+        xml = self.wrap(scene.__class__.__name__, xml)
 
         return xml
 
