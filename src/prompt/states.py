@@ -44,3 +44,5 @@ class MainMenuState(PromptApplicationState):
                     self.print_error()
         except:
             self.print_error()
+
+        return self
