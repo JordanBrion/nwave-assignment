@@ -23,7 +23,7 @@ class JsonSerializer(BaseSerializer):
         print(json)
 
     def serialize_disk(self, disk):
-        return json.dumps(disk.__dict__)
+        return json.dumps(disk.__dict__ | { "type": "DISK" })
 
 class XmlSerializer(BaseSerializer):
     def __init__(self) -> None:
