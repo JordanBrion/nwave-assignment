@@ -3,14 +3,24 @@ from dict2xml import dict2xml
 
 class BaseSerializer:
     def serialize_scene(self, scene):
-        str = ""
-        for entity in scene.entities():
-            str += entity.serialize(self)
-        print(str)
-
+        pass
 class JsonSerializer(BaseSerializer):
     def __init__(self) -> None:
         pass
+
+    def serialize_scene(self, scene):
+        json = """
+            {
+                "scene" : [
+        """
+        for entity in scene.entities():
+            json += entity.serialize(self) + ","
+        
+        json += """
+                ]
+            }
+        """
+        print(json)
 
     def serialize_disk(self, disk):
         return json.dumps(disk.__dict__)
