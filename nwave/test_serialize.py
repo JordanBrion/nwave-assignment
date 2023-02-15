@@ -1,6 +1,6 @@
 import unittest
 
-from .serialize import JsonSerializer
+from .serialize import JsonSerializer, XmlSerializer
 from .scene import Scene
 from .entities import Disk
 
@@ -32,3 +32,10 @@ class Test_Serialize(unittest.TestCase):
         json = JsonSerializer().serialize_scene(scene)
 
         self.assertGoldenJson(json, golden_fullpath="nwave/golden/three_disks.json")
+
+    def test_should_serialize_to_empty_xml_when_scene_is_empty(self):
+        scene = Scene(background_color=[102, 204, 255])
+        
+        xml = XmlSerializer().serialize_scene(scene)
+        
+        self.assertEqual(xml, '<Scene></Scene>')
