@@ -1,4 +1,5 @@
 from enum import IntEnum
+from ..serialize import JsonSerializer, XmlSerializer
 
 class MainMenuStateEnum(IntEnum):
     ADD_NEW_DISK = 1
@@ -14,13 +15,14 @@ class BasePromptApplicationState:
     def __init__(self) -> None:
         pass
 
-    def display_prompt(self):
-        try:
-            return self.display_prompt_impl()
-        except:
-            self.print_error()
+    def display_prompt(self, scene):
+        #try:
+        #    return self.display_prompt_impl()
+        #except:
+        #    self.print_error()
+        return self.display_prompt_impl(scene)
 
-    def display_prompt_impl(self):
+    def display_prompt_impl(self, scene):
         pass
 
     def ask_user_choice(self):
@@ -33,7 +35,7 @@ class SerializeSceneState(BasePromptApplicationState):
     def __init__(self) -> None:
         pass
 
-    def display_prompt_impl(self):
+    def display_prompt_impl(self, scene):
         print("""
             Select the serialization format:
             [{xml}] XML
@@ -44,17 +46,25 @@ class SerializeSceneState(BasePromptApplicationState):
 
         match self.ask_user_choice():
             case SerializeSceneStateEnum.XML:
+                self.serialize_to_xml(scene)
                 return MainMenuState()
             case SerializeSceneStateEnum.JSON:
+                self.serialize_to_json(scene)
                 return MainMenuState()
         
-        return self
+        return self        
+
+    def serialize_to_xml(self, scene):
+        print(XmlSerializer().serialize_scene(scene))
+
+    def serialize_to_json(self, scene):
+        print(JsonSerializer().serialize_scene(scene))
 
 class MainMenuState(BasePromptApplicationState):
     def __init__(self) -> None:
         pass
 
-    def display_prompt_impl(self):
+    def display_prompt_impl(self, _scene):
         print("""
             --- NWAVE ASSIGNMENT - CONSOLE MODE ---
             [{new_disk}] Add new disk
