@@ -2,7 +2,7 @@ from enum import IntEnum
 
 class MainMenuStateEnum(IntEnum):
     ADD_NEW_DISK = 1
-    SERIALIZE_TO_FILE = 2
+    SERIALIZE = 2
     SAVE_TO_IMAGE = 3
     QUIT = 4
 

@@ -35,7 +35,7 @@ class AddNewDiskState(BasePromptApplicationState):
         y = self.ask_user_choice("[Y] ? ")
 
         scene.add_entity(Disk(radius=250, position=[x, y], color=[0, 0, 255]))
-        
+
         return MainMenuState()
 
 class SerializeSceneState(BasePromptApplicationState):
@@ -109,14 +109,14 @@ class MainMenuState(BasePromptApplicationState):
             [{quit}] Quit
         """.format(
             new_disk=MainMenuStateEnum.ADD_NEW_DISK, 
-            serialize_to_file=MainMenuStateEnum.SERIALIZE_TO_FILE,
+            serialize_to_file=MainMenuStateEnum.SERIALIZE,
             export_to_image=MainMenuStateEnum.SAVE_TO_IMAGE,
             quit=MainMenuStateEnum.QUIT))
 
         match self.ask_user_choice():
             case MainMenuStateEnum.ADD_NEW_DISK:
                 return AddNewDiskState()
-            case MainMenuStateEnum.SERIALIZE_TO_FILE:
+            case MainMenuStateEnum.SERIALIZE:
                 return SerializeSceneState()
             case MainMenuStateEnum.SAVE_TO_IMAGE:
                 return SaveSceneToImageState()
