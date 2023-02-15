@@ -3,6 +3,7 @@ from ..serialize import JsonSerializer, XmlSerializer
 from ..filewriter import FileWriter
 from ..renderer import Renderer
 from ..viewport import Viewport
+from ..entities import Disk
 
 class BasePromptApplicationState:
     def __init__(self) -> None:
@@ -18,11 +19,24 @@ class BasePromptApplicationState:
     def display_prompt_impl(self, scene):
         pass
 
-    def ask_user_choice(self):
-        return int(input("What do you want to do ? "))
+    def ask_user_choice(self, msg = "What do you want to do ? "):
+        return int(input(msg))
 
     def print_error(self):
         print("This is an invalid value.")
+
+class AddNewDiskState(BasePromptApplicationState):
+    def __init__(self) -> None:
+        pass
+
+    def display_prompt_impl(self, scene):
+        print("Enter the location of the sphere. (0, 0) is at the center.")
+        x = self.ask_user_choice("[X] ? ")
+        y = self.ask_user_choice("[Y] ? ")
+
+        scene.add_entity(Disk(radius=250, position=[x, y], color=[0, 0, 255]))
+        
+        return MainMenuState()
 
 class SerializeSceneState(BasePromptApplicationState):
     def __init__(self) -> None:
@@ -101,7 +115,7 @@ class MainMenuState(BasePromptApplicationState):
 
         match self.ask_user_choice():
             case MainMenuStateEnum.ADD_NEW_DISK:
-                print("ADD_NEW_DISK")
+                return AddNewDiskState()
             case MainMenuStateEnum.SERIALIZE_TO_FILE:
                 return SerializeSceneState()
             case MainMenuStateEnum.SAVE_TO_IMAGE:
