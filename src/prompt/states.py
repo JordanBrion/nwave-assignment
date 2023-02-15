@@ -10,11 +10,11 @@ class BasePromptApplicationState:
         pass
 
     def display_prompt(self, scene):
-        #try:
-        #    return self.display_prompt_impl()
-        #except:
-        #    self.print_error()
-        return self.display_prompt_impl(scene)
+        try:
+            return self.display_prompt_impl(scene)
+        except:
+            self.print_error()
+            return MainMenuState()
 
     def display_prompt_impl(self, scene):
         pass
