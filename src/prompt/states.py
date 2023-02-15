@@ -103,14 +103,14 @@ class MainMenuState(BasePromptApplicationState):
     def display_prompt_impl(self, _scene):
         print("""
             --- NWAVE ASSIGNMENT - CONSOLE MODE ---
-            [{new_disk}] Add new disk
-            [{serialize_to_file}] Serialize to file
-            [{export_to_image}] Export to image
+            [{add_new_disk}] Add new disk
+            [{serialize}] Serialize
+            [{save_to_image}] Save to image
             [{quit}] Quit
         """.format(
-            new_disk=MainMenuStateEnum.ADD_NEW_DISK, 
-            serialize_to_file=MainMenuStateEnum.SERIALIZE,
-            export_to_image=MainMenuStateEnum.SAVE_TO_IMAGE,
+            add_new_disk=MainMenuStateEnum.ADD_NEW_DISK, 
+            serialize=MainMenuStateEnum.SERIALIZE,
+            save_to_image=MainMenuStateEnum.SAVE_TO_IMAGE,
             quit=MainMenuStateEnum.QUIT))
 
         match self.ask_user_choice():
