@@ -1,0 +1,1 @@
+{"scene":[{"radius": 250, "position": [0, 216], "color": [255, 0, 0], "type": "DISK"},{"radius": 250, "position": [-250, -216], "color": [0, 255, 0], "type": "DISK"},{"radius": 250, "position": [250, -216], "color": [0, 0, 255], "type": "DISK"},]}
