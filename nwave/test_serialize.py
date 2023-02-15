@@ -101,3 +101,14 @@ class Test_Renderer(NwaveTestCase):
             png_writer.fullpath, 
             os.path.join(self.get_renderer_golden_directory(), "three_disks.png")
         )
+
+    def test_should_be_the_same_as_the_golden_jpg(self):
+        png_writer = FileWriter(self.get_fullpath_temporary_image(".jpg"))
+        renderer = Renderer(writer=png_writer)
+        viewport = Viewport(width=1100, height=1000, renderer=renderer)
+        viewport.render(self.make_scene_with_3_disks())
+
+        self.assert_image_to_golden(
+            png_writer.fullpath, 
+            os.path.join(self.get_renderer_golden_directory(), "three_disks.jpg")
+        )
