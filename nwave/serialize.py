@@ -6,12 +6,18 @@ class JsonSerializer:
         pass
 
     def serialize_scene(self, scene):
-        json = """{"scene":["""
-        for entity in scene.entities():
-            json += entity.serialize(self) + ","
-        
-        json += """]}"""
-        return json
+        start_of_json = """{"scene":["""
+        end_of_json = """]}"""
+
+        if len(scene.entities()) == 0:
+            return start_of_json + end_of_json
+        else:
+            json = ""
+            entities = scene.entities()
+            for entity in entities[:-1]:
+                json += entity.serialize(self) + ","
+            json += entities[-1:][0].serialize(self)
+            return start_of_json + json + end_of_json
 
     def serialize_disk(self, disk):
         return json.dumps(disk.__dict__ | { "type": "DISK" })
