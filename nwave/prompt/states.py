@@ -5,7 +5,6 @@ from ..renderer import Renderer
 from ..viewport import Viewport
 from ..entities import Disk
 from .fs import get_unique_image_fullpath
-import os
 
 class BasePromptApplicationState:
     def __init__(self) -> None:
