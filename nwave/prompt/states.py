@@ -4,7 +4,7 @@ from ..filewriter import FileWriter
 from ..renderer import Renderer
 from ..viewport import Viewport
 from ..entities import Disk
-from .fs import get_application_directory, make_unique_filename
+from .fs import get_unique_image_fullpath
 import os
 
 class BasePromptApplicationState:
@@ -84,16 +84,13 @@ class SaveSceneToImageState(BasePromptApplicationState):
 
         match self.ask_user_choice():
             case SaveSceneToImageStateEnum.PNG:
-                self.save_image(scene, self.get_image_fullpath(".png"))
+                self.save_image(scene, get_unique_image_fullpath(".png"))
                 return MainMenuState()
             case SaveSceneToImageStateEnum.JPG:
-                self.save_image(scene, self.get_image_fullpath(".jpg"))
+                self.save_image(scene, get_unique_image_fullpath(".jpg"))
                 return MainMenuState()
         
         return self        
-
-    def get_image_fullpath(self, image_extension):
-        return os.path.join(get_application_directory(), make_unique_filename("nwave", image_extension))
 
     def save_image(self, scene, fullpath):
         writer = FileWriter(fullpath)
