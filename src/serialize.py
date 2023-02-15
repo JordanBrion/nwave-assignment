@@ -20,7 +20,7 @@ class JsonSerializer(BaseSerializer):
                 ]
             }
         """
-        print(json)
+        print(json) # TODO write to file
 
     def serialize_disk(self, disk):
         return json.dumps(disk.__dict__ | { "type": "DISK" })
@@ -28,6 +28,15 @@ class JsonSerializer(BaseSerializer):
 class XmlSerializer(BaseSerializer):
     def __init__(self) -> None:
         pass
+
+    def serialize_scene(self, scene):
+        xml = ""
+        for entity in scene.entities():
+            xml += entity.serialize(self)
+        
+        xml = self.wrap("Scene", xml)
+
+        print(xml) # TODO write to file
 
     def serialize_disk(self, disk):
         return self.wrap(disk.__class__.__name__, dict2xml(disk.__dict__))
