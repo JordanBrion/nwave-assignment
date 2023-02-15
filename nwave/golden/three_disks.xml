@@ -1,0 +1,16 @@
+<Scene><Disk><color>255</color>
+<color>0</color>
+<color>0</color>
+<position>0</position>
+<position>216</position>
+<radius>250</radius></Disk><Disk><color>0</color>
+<color>255</color>
+<color>0</color>
+<position>-250</position>
+<position>-216</position>
+<radius>250</radius></Disk><Disk><color>0</color>
+<color>0</color>
+<color>255</color>
+<position>250</position>
+<position>-216</position>
+<radius>250</radius></Disk></Scene>
