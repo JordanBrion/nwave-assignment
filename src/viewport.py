@@ -1,4 +1,3 @@
-
 class Viewport:
     def __init__(self, width, height, renderer):
         self.__renderer = renderer
