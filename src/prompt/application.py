@@ -5,7 +5,7 @@ from ..entities import Disk
 class PromptApplication:
     def __init__(self) -> None:
         self.scene = self.make_scene_with_default_values()
-        self.state = MainMenuState()
+        self.current_state = MainMenuState()
 
     def make_scene_with_default_values(self):
         radius=250
@@ -16,5 +16,5 @@ class PromptApplication:
         return scene
 
     def run(self):
-        while self.state is not None:
-            self.state = self.state.display_prompt(self.scene)
+        while self.current_state is not None:
+            self.current_state = self.current_state.display_prompt(self.scene)
