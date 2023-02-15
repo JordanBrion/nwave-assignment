@@ -4,6 +4,8 @@ from ..filewriter import FileWriter
 from ..renderer import Renderer
 from ..viewport import Viewport
 from ..entities import Disk
+from .fs import get_application_directory, make_unique_filename
+import os
 
 class BasePromptApplicationState:
     def __init__(self) -> None:
@@ -15,7 +17,7 @@ class BasePromptApplicationState:
         except:
             self.print_error()
             return MainMenuState()
-
+          
     def display_prompt_impl(self, scene):
         pass
 
@@ -82,19 +84,23 @@ class SaveSceneToImageState(BasePromptApplicationState):
 
         match self.ask_user_choice():
             case SaveSceneToImageStateEnum.PNG:
-                self.save_image(scene, "/Users/jordanbrion/Downloads/bbb1.png") # TODO file path
+                self.save_image(scene, self.get_image_fullpath(".png"))
                 return MainMenuState()
             case SaveSceneToImageStateEnum.JPG:
-                self.save_image(scene, "/Users/jordanbrion/Downloads/bbb1.jpg") # TODO file path
+                self.save_image(scene, self.get_image_fullpath(".jpg"))
                 return MainMenuState()
         
         return self        
 
-    def save_image(self, scene, path):
-        writer = FileWriter(path)
+    def get_image_fullpath(self, image_extension):
+        return os.path.join(get_application_directory(), make_unique_filename("nwave", image_extension))
+
+    def save_image(self, scene, fullpath):
+        writer = FileWriter(fullpath)
         renderer = Renderer(writer=writer)
-        viewport = Viewport(width=1100, height=1000, renderer=renderer) # TODO store dimensions in consts
+        viewport = Viewport(width=1100, height=1000, renderer=renderer) # TODO store dimensions in variables
         viewport.render(scene)
+        print("Image saved to " + fullpath)
 
 class MainMenuState(BasePromptApplicationState):
     def __init__(self) -> None:
