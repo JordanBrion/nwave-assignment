@@ -1,10 +1,7 @@
 import json
 from dict2xml import dict2xml
 
-class BaseSerializer:
-    def serialize_scene(self, scene):
-        pass
-class JsonSerializer(BaseSerializer):
+class JsonSerializer:
     def __init__(self) -> None:
         pass
 
@@ -25,7 +22,7 @@ class JsonSerializer(BaseSerializer):
     def serialize_disk(self, disk):
         return json.dumps(disk.__dict__ | { "type": "DISK" })
 
-class XmlSerializer(BaseSerializer):
+class XmlSerializer:
     def __init__(self) -> None:
         pass
 
